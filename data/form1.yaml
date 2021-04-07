@@ -1,0 +1,73 @@
+form_name: 'form1_informal'
+
+start:
+  regexp: 'знакомство'
+  suggests:
+    - Start!
+    - Exit the test
+
+fields:
+  - name: age
+    question: Сколько вам лет?
+    validate_regexp: '\d+$'
+    validate_message: Возраст должен быть целым вещественным числом!
+  - name: gender
+    question: Укажите свой гендер.
+    options:
+      - мужчина
+      - женщина
+      - шоколадный маффин
+  - name: city
+    question: Из какого города Вы приехали в “Сириус”?
+  - name: job
+    question: Какую занимаете должность в Сириусе?
+  - name: domain
+    question: В каком направлении вы работаете?
+    options:
+      - наука
+      - искусство
+      - спорт
+  - name: program
+    question: 'Расскажите, в какой образовательной программе вы участвуете? :3'
+  - name: program_is_interesting
+    question: Интересно ли вам это направление?
+    options:
+      - text: да
+        next: wants_new_people
+      - text: нет
+        next: interesting_programs
+  - name: interesting_programs
+    question: А какое направление для Вас интересно?
+  - name: wants_new_people
+    question: Хотели бы Вы познакомиться с другими преподавателями и экспертами в этой области?
+    options:
+      - да
+      - нет
+  - name: interesting_spheres
+    question: А теперь расскажите про свои увлечения. Какие направления вам интересны?
+    options:
+      - гуманитарные науки
+      - естественно-научные дисциплины
+      - физико-математические науки
+      - спорт
+      - хореография
+      - театр
+      - кино
+      - живопись
+      - музыка
+      - дизайн
+    multivalued: true
+    exit_option: 'никакие из этих'
+  - name: wants_to_try
+    question:  Хотели бы вы попробовать себя в данных направлениях?
+    options:
+      - да
+      - нет
+  - name: needs_consulting
+    question: Нужна ли вам консультация преподавателей по данным направлениям?
+    options:
+      - да
+      - нет
+
+finish:
+  message: Спасибо, что вы ответили на мои вопросы! Скоро я вернусь к вам с чем-нибудь новеньким.
