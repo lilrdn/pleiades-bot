@@ -1,5 +1,5 @@
 attrs
-dialogic>=0.3.7
+dialogic>=0.3.8
 flask
 dnspython
 pymongo
