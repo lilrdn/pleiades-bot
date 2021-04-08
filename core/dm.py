@@ -14,6 +14,7 @@ csc = Cascade()
 @attr.s
 class PTurn(DialogTurn):
     polylogs_collection = attr.ib(default=None)
+    no_response: bool = attr.ib(default=False)
 
 
 class PleyadeDM(TurnDialogManager):
@@ -26,6 +27,9 @@ class PleyadeDM(TurnDialogManager):
             turn.user_object = {}
         # turn.stage = None  # the old stage will be left intact
         turn.polylogs_collection = self.polylogs_collection
+
+    def postprocess_response(self, response: Response, turn: PTurn):
+        response.no_response = turn.no_response
 
 
 class FFDM(dialogic.dialog_manager.FormFillingDialogManager):
@@ -61,7 +65,7 @@ def try_forms(turn: DialogTurn):
             return
 
 
-def make_dm(forms_collection, polylogs_collection) -> PleyadeDM:
+def make_dm(forms_collection=None, polylogs_collection=None) -> PleyadeDM:
     dm = PleyadeDM(csc, turn_cls=PTurn, polylogs_collection=polylogs_collection)
     for m in form_dms:
         m.forms_collection = forms_collection
