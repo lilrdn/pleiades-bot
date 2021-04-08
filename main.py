@@ -5,8 +5,9 @@ import sentry_sdk
 import dialogic
 
 
-from core.dm import FFDM
+from core.dm import FFDM, make_dm
 from misc.vk import VA
+from scenarios import *
 
 
 if os.getenv('SENTRY_DSN', None) is not None:
@@ -14,11 +15,6 @@ if os.getenv('SENTRY_DSN', None) is not None:
 
 
 logging.basicConfig(level=logging.DEBUG)
-
-
-HELP_MESSAGE = 'Привет! Я чат-бот “Плеяды”, приятно познакомиться! ' \
-               'Предлагаю ответить на несколько вопросов, чтобы начать работу.' \
-               '\nНапечатайте "знакомство", чтобы начать.'
 
 
 if os.environ.get('MONGODB_URI'):
@@ -32,7 +28,7 @@ else:
     forms_collection = None
 
 
-manager = FFDM('data/form1.yaml', default_message=HELP_MESSAGE, forms_collection=forms_collection)
+manager = make_dm(forms_collection=forms_collection)
 
 
 connector = dialogic.dialog_connector.DialogConnector(

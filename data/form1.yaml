@@ -16,11 +16,22 @@ fields:
     options:
       - мужчина
       - женщина
-      - шоколадный маффин
+      - text: шоколадный маффин
+        next: serious_gender
+    next: city
+  - name: serious_gender
+    question: Вы уверены? Попробуйте выбрать свой гендер ещё раз.
+    options:
+      - мужчина
+      - женщина
   - name: city
     question: Из какого города Вы приехали в “Сириус”?
+    validate_regexp: '[а-яa-z]{2,}'
+    validate_message: Это не похоже на город, попробуйте ещё раз!
   - name: job
     question: Какую занимаете должность в Сириусе?
+    validate_regexp: '[а-яa-z]{2,}'
+    validate_message: Это не похоже на должность, попробуйте ещё раз!
   - name: domain
     question: В каком направлении вы работаете?
     options:
@@ -29,6 +40,8 @@ fields:
       - спорт
   - name: program
     question: 'Расскажите, в какой образовательной программе вы участвуете? :3'
+    validate_regexp: '[а-яa-z]{2,}'
+    validate_message: Это не похоже на программу, попробуйте ещё раз!
   - name: program_is_interesting
     question: Интересно ли вам это направление?
     options:
@@ -45,6 +58,7 @@ fields:
       - нет
   - name: interesting_spheres
     question: А теперь расскажите про свои увлечения. Какие направления вам интересны?
+    repeated_question: Может быть, что-то еще?
     options:
       - гуманитарные науки
       - естественно-научные дисциплины
@@ -58,6 +72,8 @@ fields:
       - дизайн
     multivalued: true
     exit_option: 'никакие из этих'
+  - name: more_spheres
+    question: Может быть вам нравится что-то, что не было указано? Напишите, что именно.
   - name: wants_to_try
     question:  Хотели бы вы попробовать себя в данных направлениях?
     options:
