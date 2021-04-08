@@ -61,8 +61,8 @@ def try_forms(turn: DialogTurn):
             return
 
 
-def make_dm(forms_collection, polylogs_collection):
-    dm = TurnDialogManager(csc, turn_cls=PTurn, polylogs_collection=polylogs_collection)
+def make_dm(forms_collection, polylogs_collection) -> PleyadeDM:
+    dm = PleyadeDM(csc, turn_cls=PTurn, polylogs_collection=polylogs_collection)
     for m in form_dms:
         m.forms_collection = forms_collection
     return dm
