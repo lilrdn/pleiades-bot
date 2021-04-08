@@ -20,15 +20,20 @@ logging.basicConfig(level=logging.DEBUG)
 if os.environ.get('MONGODB_URI'):
     db = dialogic.storage.database_utils.get_mongo_or_mock()
     forms_collection = db.get_collection('forms')
+    polylogs_collection = db.get_collection('polylogs')
     storage = dialogic.session_storage.MongoBasedStorage(database=db)
     log_storage = dialogic.storage.message_logging.MongoMessageLogger(database=db, detect_pings=True)
 else:
     storage = dialogic.storage.session_storage.FileBasedStorage(path='_tmp/sessions')
     log_storage = None
     forms_collection = None
+    polylogs_collection = None
 
 
-manager = make_dm(forms_collection=forms_collection)
+manager = make_dm(
+    forms_collection=forms_collection,
+    polylogs_collection=polylogs_collection,
+)
 
 
 connector = dialogic.dialog_connector.DialogConnector(

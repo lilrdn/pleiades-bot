@@ -2,6 +2,7 @@ import copy
 from datetime import datetime
 
 import dialogic
+import attr
 from dialogic.cascade import Cascade, Pr, DialogTurn
 from dialogic.dialog import Context, Response
 from dialogic.dialog_manager import TurnDialogManager
@@ -10,8 +11,21 @@ from dialogic.dialog_manager import TurnDialogManager
 csc = Cascade()
 
 
+@attr.s
 class PTurn(DialogTurn):
-    pass
+    polylogs_collection = attr.ib(default=None)
+
+
+class PleyadeDM(TurnDialogManager):
+    def __init__(self, *args, polylogs_collection=None, **kwargs):
+        super(PleyadeDM, self).__init__(*args, **kwargs)
+        self.polylogs_collection = polylogs_collection
+
+    def preprocess_turn(self, turn: PTurn):
+        if not turn.user_object:
+            turn.user_object = {}
+        # turn.stage = None  # the old stage will be left intact
+        turn.polylogs_collection = self.polylogs_collection
 
 
 class FFDM(dialogic.dialog_manager.FormFillingDialogManager):
@@ -32,10 +46,9 @@ class FFDM(dialogic.dialog_manager.FormFillingDialogManager):
         )
 
 
-form1 = FFDM('data/form1.yaml')
-
 form_dms = [
-    form1
+    FFDM('data/form1.yaml'),
+    FFDM('data/form2.yaml'),
 ]
 
 
@@ -48,8 +61,8 @@ def try_forms(turn: DialogTurn):
             return
 
 
-def make_dm(forms_collection):
-    dm = TurnDialogManager(csc)
+def make_dm(forms_collection, polylogs_collection):
+    dm = TurnDialogManager(csc, turn_cls=PTurn, polylogs_collection=polylogs_collection)
     for m in form_dms:
         m.forms_collection = forms_collection
     return dm
