@@ -18,12 +18,14 @@ fields:
       - женщина
       - text: шоколадный маффин
         next: serious_gender
+      - пропустить
     next: city
   - name: serious_gender
     question: Вы уверены? Попробуйте выбрать свой гендер ещё раз.
     options:
       - мужчина
       - женщина
+      - пропустить
   - name: city
     question: Из какого города Вы приехали в “Сириус”?
     validate_regexp: '[а-яa-z]{2,}'
