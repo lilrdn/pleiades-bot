@@ -51,7 +51,8 @@ class FFDM(dialogic.dialog_manager.FormFillingDialogManager):
             self.forms_collection.insert_one(document)
         return Response(
             text=self.config.finish_message,
-            user_object=user_object
+            user_object=user_object,
+            suggests=self.config.finish_suggests or [],
         )
 
 
