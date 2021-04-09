@@ -21,11 +21,13 @@ def log_polylog(turn: PTurn):
     bot_id = os.environ.get('VK_GROUP_ID', '203824813')
 
     need_to_respond = False
-    if m.action and m.action.get('type') == 'chat_invite_user':
-        need_to_respond = True
-    elif f'[club{bot_id}|' in m.text:
+    # if m.action and m.action.get('type') == 'chat_invite_user':
+    #    need_to_respond = True
+    if f'[club{bot_id}|' in m.text:
+        # send the message if the bot was explicitly tagged
         need_to_respond = True
     elif turn.polylogs_collection:
+        # send the message if the chat is unfamiliar to the bot
         one = turn.polylogs_collection.find_one({'peer_id': m.peer_id})
         if one is None:
             need_to_respond = True
