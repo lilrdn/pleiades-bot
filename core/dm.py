@@ -13,23 +13,28 @@ csc = Cascade()
 
 @attr.s
 class PTurn(DialogTurn):
+    forms_collection = attr.ib(default=None)
     polylogs_collection = attr.ib(default=None)
     no_response: bool = attr.ib(default=False)
+    upload_filename: str = attr.ib(default=None)
 
 
 class PleyadeDM(TurnDialogManager):
-    def __init__(self, *args, polylogs_collection=None, **kwargs):
+    def __init__(self, *args, forms_collection=None, polylogs_collection=None, **kwargs):
         super(PleyadeDM, self).__init__(*args, **kwargs)
         self.polylogs_collection = polylogs_collection
+        self.forms_collection = forms_collection
 
     def preprocess_turn(self, turn: PTurn):
         if not turn.user_object:
             turn.user_object = {}
         # turn.stage = None  # the old stage will be left intact
         turn.polylogs_collection = self.polylogs_collection
+        turn.forms_collection = self.forms_collection
 
     def postprocess_response(self, response: Response, turn: PTurn):
         response.no_response = turn.no_response
+        # todo: add filename to response
 
 
 class FFDM(dialogic.dialog_manager.FormFillingDialogManager):
@@ -41,7 +46,7 @@ class FFDM(dialogic.dialog_manager.FormFillingDialogManager):
         document = copy.deepcopy(form)
         document['user_id'] = ctx.user_id
         document['timestamp'] = datetime.now()
-        print('DOCUMENT IS', document)
+
         if self.forms_collection:
             self.forms_collection.insert_one(document)
         return Response(
@@ -66,7 +71,12 @@ def try_forms(turn: DialogTurn):
 
 
 def make_dm(forms_collection=None, polylogs_collection=None) -> PleyadeDM:
-    dm = PleyadeDM(csc, turn_cls=PTurn, polylogs_collection=polylogs_collection)
+    dm = PleyadeDM(
+        csc,
+        turn_cls=PTurn,
+        polylogs_collection=polylogs_collection,
+        forms_collection=forms_collection,
+    )
     for m in form_dms:
         m.forms_collection = forms_collection
     return dm

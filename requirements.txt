@@ -5,4 +5,4 @@ dnspython
 pymongo
 mongomock
 sentry-sdk
-
+pandas
