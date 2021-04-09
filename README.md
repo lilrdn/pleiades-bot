@@ -3,6 +3,8 @@
 Бот для проведения опросов в ВК. 
 Написан на Python. 
 
+[![Tests](https://github.com/avidale/pleiades-bot/actions/workflows/test_and_deploy.yaml/badge.svg?branch=master)](https://github.com/avidale/pleiades-bot/actions/workflows/test_and_deploy.yaml)
+
 Форма анкет, которые предлагает заполнить бот, хранится в папке `data/forms`.
 
 Подготовка: 
