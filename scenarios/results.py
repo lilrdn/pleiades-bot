@@ -1,5 +1,5 @@
 import os
-from random import random
+import random
 
 from core.dm import csc, Pr, PTurn
 
@@ -33,7 +33,7 @@ def forms2excel(forms, filename='forms.xlsx'):
     writer.save()
 
 
-CODEWORD = os.environ.get('CODEWORD') or str(random.rand())
+CODEWORD = os.environ.get('CODEWORD') or str(random.random())
 
 
 @csc.add_handler(priority=Pr.STRONG_INTENT, regexp='.*результат.*')
