@@ -93,6 +93,25 @@ fields:
     q: В общении я тщательно взвешиваю все обстоятельства, много размышляю перед принятием решения.
     options: ['1', '2', '3', '4', '5']
 
+  - name: leary_test
+    q: "Также попрошу пройти тестик на межличностные отношения, это займет несколько минут.
+      Вы сразу получите результат.
+      \n Отправьте в ответ на это сообщение в ответ ссылку с результатом.
+      \n https://psytests.org/interpersonal/leary.html"
+    validate_raw: true
+    validate_regexp: 'https://psytests.org/result\?v=[a-zA-Z0-9]+$'
+    validate_message: 'То, что вы прислали, не похоже на ссылку.
+      Она должна быть в формате https://psytests.org/result?v=abcDefGh89jhI3. Пожалуйста, попробуйте ещё раз.'
+
+  - name: bass_orientation
+    q: "Вы проделали огромную работу! Остался последний шаг.
+      \n Пройдите пожалуйста ориентировочную анкету, чтобы помочь нам завершить проект)
+      \n Прошу также прикрепить сюда ссылку на результат.
+      \n https://psytests.org/personal/bassA-run.html"
+    validate_raw: true
+    validate_regexp: 'https://psytests.org/result\?v=[a-zA-Z0-9]+$'
+    validate_message: 'То, что вы прислали, не похоже на ссылку.
+      Она должна быть в формате https://psytests.org/result?v=abcDefGh89jhI3. Пожалуйста, попробуйте ещё раз.'
 
 finish:
   message: Спасибо, что вы ответили на мои вопросы! Скоро я вернусь к вам с чем-нибудь новеньким.
