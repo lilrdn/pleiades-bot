@@ -6,3 +6,4 @@ pymongo
 mongomock
 sentry-sdk
 pandas
+openpyxl

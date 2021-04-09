@@ -56,8 +56,8 @@ class FFDM(dialogic.dialog_manager.FormFillingDialogManager):
 
 
 form_dms = [
-    FFDM('data/form1.yaml'),
-    FFDM('data/form2.yaml'),
+    FFDM('data/forms/form1.yaml'),
+    FFDM('data/forms/form2.yaml'),
 ]
 
 
