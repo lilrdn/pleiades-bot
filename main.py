@@ -42,7 +42,10 @@ connector = dialogic.dialog_connector.DialogConnector(
     log_storage=log_storage,
     alice_native_state=False,
 )
-connector.adapters[dialogic.SOURCES.VK] = VA(suggest_cols='auto')
+connector.adapters[dialogic.SOURCES.VK] = VA(
+    suggest_cols='auto',
+    suggest_margin=2,
+)
 
 
 handler = connector.serverless_alice_handler
