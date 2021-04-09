@@ -12,7 +12,7 @@ def fallback(turn: PTurn):
         turn.suggests.append('знакомство')
     elif not turn.user_object.get('forms', {}).get('form2'):
         turn.response_text = 'Привет! У меня есть ещё одна анкета - про навыки, которые вам нужны. ' \
-                             'Если вы её готовы пройти, жмите "навыки"'
+                             'Если вы её готовы пройти, жмите "навыки"!'
         turn.suggests.append('навыки')
     else:
         turn.response_text = "У меня пока больше нет для вас контента. Напишите позднее, пожалуйста."
