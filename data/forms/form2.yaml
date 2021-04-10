@@ -99,7 +99,7 @@ fields:
       \n Отправьте в ответ на это сообщение в ответ ссылку с результатом.
       \n https://psytests.org/interpersonal/leary.html"
     validate_raw: true
-    validate_regexp: 'https://psytests.org/result\?v=[a-zA-Z0-9]+$'
+    validate_regexp: 'https://psytests.org/result\?v=.+'
     validate_message: 'То, что вы прислали, не похоже на ссылку.
       Она должна быть в формате https://psytests.org/result?v=abcDefGh89jhI3. Пожалуйста, попробуйте ещё раз.'
 
@@ -109,7 +109,7 @@ fields:
       \n Прошу также прикрепить сюда ссылку на результат.
       \n https://psytests.org/personal/bassA-run.html"
     validate_raw: true
-    validate_regexp: 'https://psytests.org/result\?v=[a-zA-Z0-9]+$'
+    validate_regexp: 'https://psytests.org/result\?v=.+'
     validate_message: 'То, что вы прислали, не похоже на ссылку.
       Она должна быть в формате https://psytests.org/result?v=abcDefGh89jhI3. Пожалуйста, попробуйте ещё раз.'
 
