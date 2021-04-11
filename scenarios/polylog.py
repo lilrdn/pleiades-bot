@@ -44,9 +44,12 @@ def log_polylog(turn: PTurn):
         turn.no_response = True
 
     if turn.polylogs_collection:
+        mdata = m.data or {}
         turn.polylogs_collection.insert_one({
             'peer_id': m.peer_id,
             'user_id': m.user_id,
             'time': datetime.now(),
             'text': m.text,
+            'reply_message': mdata.get('reply_message'),
+            'id': mdata.get('id'),
         })
