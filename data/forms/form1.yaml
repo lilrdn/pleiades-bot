@@ -1,7 +1,7 @@
 form_name: 'form1_informal'
 
 start:
-  regexp: 'знакомство'
+  regexp: '(знакомство|первая анкета|анкета 1)$'
   suggests:
     - Start!
     - Exit the test
